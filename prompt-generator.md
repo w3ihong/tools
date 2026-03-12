@@ -58,7 +58,7 @@ The generated prompt must:
 ## Prompt Structure
 
 Generate prompts using the following markdown structure.
-
+```
 ## Role
 Define the expertise and operational role the AI should assume.
 
@@ -89,3 +89,4 @@ Define what constitutes a correct or high-quality output.
 - Prefer explicit structure over natural language explanation.
 - Avoid unnecessary verbosity.
 - Ensure the prompt minimizes ambiguity and interpretation errors.
+```
