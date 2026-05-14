@@ -1,6 +1,11 @@
 # Feature Development Playbook (AI-First Workflow)
 
-A reusable process for taking a vague feature request from idea to production in a structured, repeatable manner. This workflow is optimized for modern AI-assisted development and can scale from small bug fixes to large production features.
+A structured end-to-end workflow for transforming product ideas into production-ready features using AI-assisted development.
+
+This version reflects a modern, lean engineering process where:
+- Requirements are unified into a PRD-first artifact
+- Technical research is explicitly separated from planning
+- Implementation is split into high-level and repository-level planning
 
 ---
 
@@ -8,71 +13,83 @@ A reusable process for taking a vague feature request from idea to production in
 
 Requirements define outcomes.
 
-Implementation plans define execution.
+Research evaluates feasibility.
 
-Rollout plans define how changes are introduced safely.
+Design defines the technical approach.
 
-Keep these concerns separate:
-
-- What needs to be built and why → Feature Request / PRD
-- How it will be built → Technical Design / Implementation Plan
-- How it will be released safely → Rollout Plan
+Execution plans define code-level changes.
 
 ---
 
-# Standard Operating Procedure
+# Standard Workflow
 
-Clarify → Triage → Plan → Build → Validate → Release → Learn
-
----
-
-# High-Level Workflow
-
-Feature Request
+Requirements (Feature Request → PRD)
 → Triaging
-→ Optional PRD / Requirement Specification
-→ Implementation Plan
+→ Technical Research / Solution Exploration
+→ High-Level Implementation Plan
+→ Repository-Level Implementation Plan
 → Implementation
-→ Testing and Validation
-→ Rollout Plan
-→ Production Release
+→ Testing & Validation
+→ Rollout
 → Post-Release Review
 
 ---
 
-# 1. Feature Request
+# 1. Requirements (PRD-First Approach)
 
 ## Purpose
 
-Capture the desired outcome in business and user terms.
+Define *what* needs to be built and *why* in a structured, testable format.
 
-The feature request should describe:
+In this workflow, the PRD replaces the traditional standalone feature request.
 
-- The problem being solved
-- Who the feature is for
-- What the expected behavior is
-- Constraints and success criteria
+A "feature request" is treated as the **raw input**, which is immediately refined into a PRD.
 
-The feature request should not contain technical implementation details such as:
+---
 
-- Database tables
-- API endpoints
-- Specific components or classes
-- Framework-specific instructions
-- Code-level recommendations
+## Inputs
 
-## Example
+- Stakeholder intent
+- Business requirements
+- User problems
+- Constraints
+- Success expectations
 
-Users should be able to save products to a wishlist and access them later from their profile.
+---
 
-## Typical Contents
+## PRD Contents
+
+A PRD should include:
 
 - Title
-- Problem statement
-- User story
-- Acceptance criteria
-- Constraints
-- Success metrics
+- Problem Statement
+- Goals
+- Non-Goals
+- User Stories
+- Functional Requirements
+- Non-Functional Requirements
+- Acceptance Criteria
+- Success Metrics
+- Constraints & Assumptions
+- Open Questions
+
+---
+
+## Key Rule
+
+No technical implementation details should be included in the PRD, such as:
+
+- APIs
+- Database schemas
+- Framework choices
+- Code structure
+- Infrastructure design
+
+---
+
+## Output
+
+A structured, validated PRD that becomes the single source of truth for downstream engineering work.
 
 ---
 
@@ -80,132 +97,158 @@ Users should be able to save products to a wishlist and access them later from t
 
 ## Purpose
 
-Perform a rapid assessment to determine:
+Perform a rapid assessment of the PRD to determine:
 
 - Priority
 - Complexity
 - Risk
-- Estimated effort
+- Effort estimate
 - Dependencies
-- Required documentation
-- Recommended next step
+- Required depth of planning
 
-Triaging determines how much process and documentation the feature requires.
+---
+
+## Outputs
+
+- Go / No-Go decision
+- Required documentation level
+- Initial risk classification
+- Suggested next step (research required or not)
+
+---
 
 ## Triage Template
 
-- Problem
+- Problem Summary
 - Priority
 - Complexity (Low / Medium / High)
 - Risk (Low / Medium / High)
 - Estimated Effort
 - Dependencies
-- Documentation Needed
+- Documentation Required
 - Recommended Next Step
 
-## Output Example
-
-- Priority: High
-- Complexity: Medium
-- Risk: Low
-- Estimated Effort: 2–3 days
-- Dependencies: None
-- Documentation Needed: Lightweight Feature Spec
-- Recommended Next Step: Generate Implementation Plan
-
 ---
 
-# 3. PRD (Product Requirements Document) — Optional
+# 3. Technical Research / Solution Exploration
 
 ## Purpose
 
-Formalize detailed requirements when the feature is complex, ambiguous, or involves multiple stakeholders.
+Evaluate possible technical approaches before committing to an architecture.
 
-## Use When
-
-- Requirements are unclear
-- Business logic is substantial
-- Multiple stakeholders must align
-- Scope must be documented explicitly
-
-## Skip When
-
-- The feature is small and straightforward
-- You are working alone
-- The feature request already contains enough detail
-
-## Typical Contents
-
-- Executive summary
-- Problem statement
-- Goals
-- Non-goals
-- User stories
-- Functional requirements
-- Non-functional requirements
-- Acceptance criteria
-- Success metrics
-- Open questions
+This is the **decision-making layer between PRD and design**.
 
 ---
-
-# 4. Technical Design (Optional)
-
-## Purpose
-
-Describe the proposed system architecture and major technical decisions.
-
-## Use When
-
-- The feature affects core architecture
-- Multiple implementation approaches exist
-- Significant technical tradeoffs must be evaluated
-- Security, scalability, or performance concerns are important
-
-## Typical Contents
-
-- Current architecture overview
-- Proposed architecture
-- Affected systems and components
-- Data model changes
-- API contracts
-- Alternatives considered
-- Risks
-- Rollback strategy
-
----
-
-# 5. Implementation Plan
-
-## Purpose
-
-Translate requirements into concrete engineering tasks.
-
-This is the most important artifact for coding agents.
 
 ## Inputs
 
-- Feature request
-- PRD (if used)
-- Technical design (if used)
-- Existing codebase
-- Project constraints
+- PRD
+- System constraints
+- Existing architecture context
 
-## Typical Contents
+---
 
-- Objective
-- Assumptions
-- Impact analysis
-- Affected files and modules
-- Data flow changes
-- Task breakdown
-- Execution order
-- Testing strategy
-- Risks and rollback notes
+## Activities
+
+- Evaluate multiple implementation approaches
+- Compare tools, frameworks, and services
+- Assess tradeoffs:
+  - scalability
+  - performance
+  - cost
+  - complexity
+  - maintainability
+- Identify risks and constraints
+- Validate feasibility
+
+---
 
 ## Output
 
-A detailed, step-by-step plan that can be executed by a developer or coding agent.
+- Recommended technical approach
+- Alternatives considered
+- Tradeoff analysis
+- Risks and mitigations
+
+---
+
+## Key Rule
+
+Research does not define the final system design. It only informs it.
+
+---
+
+# 4. High-Level Implementation Plan
+
+## Purpose
+
+Translate PRD + research into a system-level solution.
+
+This defines the **architecture and workstreams**, not code-level changes.
+
+---
+
+## Inputs
+
+- PRD
+- Research findings
+
+---
+
+## Contents
+
+- Objective summary
+- Requirements recap
+- Selected technical approach
+- System architecture overview
+- Data flow design
+- Major components affected
+- Integration points
+- Risks and mitigations
+- Rollback strategy
+- Workstream breakdown
+
+---
+
+## Output
+
+A validated architectural plan that is ready for decomposition into repository-level tasks.
+
+---
+
+# 5. Repository-Level Implementation Plan
+
+## Purpose
+
+Convert the high-level design into concrete codebase changes.
+
+This is the primary execution document for coding agents.
+
+---
+
+## Inputs
+
+- High-level implementation plan
+- Codebase context
+
+---
+
+## Contents
+
+- File-by-file changes
+- New modules/components
+- API route changes
+- Database migrations
+- Function-level modifications
+- Task ordering
+- Test additions
+- Validation steps
+
+---
+
+## Output
+
+A deterministic execution plan that can be followed step-by-step.
 
 ---
 
@@ -213,224 +256,166 @@ A detailed, step-by-step plan that can be executed by a developer or coding agen
 
 ## Purpose
 
-Build the feature according to the implementation plan.
-
-## Best Practices
-
-- Work in small, reviewable increments
-- Follow existing project patterns
-- Keep tests close to code
-- Use feature flags for risky changes
-- Validate continuously
+Execute the repository-level plan.
 
 ---
 
-# 7. Testing and Validation
+## Best Practices
+
+- Small, incremental changes
+- Frequent commits
+- Maintain alignment with existing architecture
+- Write tests alongside implementation
+- Use feature flags for risky changes
+
+---
+
+# 7. Testing & Validation
 
 ## Purpose
 
-Verify that the feature satisfies requirements and does not introduce regressions.
+Ensure correctness and prevent regressions.
 
-## Types of Testing
+---
+
+## Testing Layers
 
 - Unit tests
 - Integration tests
 - End-to-end tests
 - Regression tests
-- Performance tests
-- Security tests
-
-## Validation Questions
-
-- Does the feature satisfy all acceptance criteria?
-- Are edge cases handled?
-- Were existing features affected?
-- Are performance and reliability acceptable?
+- Performance checks (if needed)
 
 ---
 
-# 8. Rollout Plan
+## Validation Criteria
+
+- Meets PRD acceptance criteria
+- No regressions introduced
+- Edge cases handled
+- Performance acceptable
+
+---
+
+# 8. Rollout
 
 ## Purpose
 
-Deploy safely and maintain the ability to recover quickly.
+Safely deploy the feature into production.
+
+---
 
 ## Use When
 
-- Production-critical behavior is modified
-- Database migrations are involved
-- Breaking changes are possible
-- Gradual rollout is desired
+- Production systems are affected
+- Data migrations are involved
+- Behavior changes are non-trivial
+- Risk exists
 
-## Typical Contents
+---
+
+## Components
 
 - Deployment steps
 - Feature flag strategy
+- Gradual rollout plan
 - Monitoring metrics
 - Rollback procedure
 
 ---
 
-# 9. Production Release
+# 9. Post-Release Review
 
 ## Purpose
 
-Deploy the feature to production and monitor system health.
-
-## Monitor
-
-- Error rates
-- Latency
-- Resource usage
-- Business metrics
-- User feedback
+Validate whether the feature achieved its intended outcome.
 
 ---
 
-# 10. Post-Release Review
-
-## Purpose
-
-Confirm that the feature achieved its intended outcome.
-
 ## Activities
 
-- Review usage and adoption metrics
-- Analyze incidents or regressions
-- Gather stakeholder feedback
-- Identify follow-up improvements
+- Monitor usage metrics
+- Analyze error rates
+- Collect user feedback
+- Evaluate success metrics
+- Identify follow-ups
 
 ---
 
 # Decision Matrix
 
-| Complexity | Risk | Recommended Process |
-|----------|----------|----------------|
-| Low | Low | Feature Request → Implementation Plan |
-| Medium | Low | Feature Request → Lightweight PRD → Implementation Plan |
-| Medium | High | PRD → Technical Design → Implementation Plan |
-| High | High | Full planning, staged rollout, and monitoring |
+| Complexity | Risk | Process |
+|----------|------|--------|
+| Low | Low | PRD → Implementation Plan → Execution |
+| Medium | Low | PRD → Triaging → Research → Implementation Plan |
+| Medium | High | PRD → Research → High-Level Design → Repo Plan |
+| High | High | Full pipeline with staged rollout and monitoring |
 
 ---
 
-# Lean AI-First Workflows
+# Lean AI-First Variants
 
 ## Small Features
 
-Feature Request
-→ Triaging
-→ Implementation Plan
-→ Implementation
-→ Testing
-→ Merge
+PRD → Triaging → Implementation Plan → Implementation → Testing → Merge
 
 ## Medium Features
 
-Feature Request
-→ Triaging
-→ Lightweight PRD
-→ Implementation Plan
-→ Implementation
-→ Testing
-→ Deploy
+PRD → Triaging → Research → High-Level Plan → Repo Plan → Implementation → Deploy
 
-## Large or High-Risk Features
+## Large Features
 
-Feature Request
-→ Triaging
-→ PRD
-→ Technical Design
-→ Implementation Plan
-→ Implementation
-→ Staged Rollout
-→ Monitoring
+PRD → Triaging → Research → High-Level Design → Repo Plan → Implementation → Staged Rollout → Monitoring
 
 ---
 
 # Minimal Recommended Workflow
 
-For most solo and AI-assisted development work:
-
-1. Receive Feature Request
-2. Triage the Request
-3. Clarify Requirements if Necessary
-4. Generate Implementation Plan
-5. Review and Refine the Plan
-6. Execute with a Coding Agent
-7. Validate Against Acceptance Criteria
-8. Deploy with Rollback Capability
-9. Monitor and Iterate
+1. Convert feature request into PRD
+2. Triage PRD
+3. Perform technical research if needed
+4. Create high-level implementation plan
+5. Convert into repository-level plan
+6. Execute via coding agent
+7. Validate and test
+8. Deploy safely
+9. Review outcomes
 
 ---
 
-# Documents and Their Purpose
+# Key Relationships Between Artifacts
 
-| Document | Core Question Answered |
+| Artifact | Purpose |
 |------|------|
-| Feature Request | What should be built and why? |
-| PRD | What are the detailed requirements? |
-| Technical Design | How should the system solve the problem? |
-| Implementation Plan | What tasks need to be executed and in what order? |
-| Test Plan | How will correctness be verified? |
-| Rollout Plan | How will the feature be released safely? |
+| PRD | Defines what and why |
+| Research | Evaluates possible solutions |
+| High-Level Plan | Defines architecture |
+| Repo-Level Plan | Defines code changes |
+| Implementation | Executes changes |
+| Rollout Plan | Ensures safe deployment |
 
 ---
 
-# Recommended Project Structure
+# AI-First Engineering Philosophy
 
-docs/
-- feature-request.md
-- prd.md (optional)
-- technical-design.md (optional)
-- implementation-plan.md
-- test-plan.md (optional)
-- rollout-plan.md (optional)
+The system is optimized for AI-assisted execution:
 
----
-
-# Practical Rules of Thumb
-
-- Every feature should be triaged.
-- Every non-trivial feature should have an implementation plan.
-- PRDs are optional and should be created when ambiguity or complexity warrants them.
-- Technical design documents are used when architecture decisions and tradeoffs are significant.
-- Rollout plans are necessary when production risk is meaningful.
-- The implementation plan is the primary artifact used by coding agents.
-
----
-
-# AI-First Development Philosophy
-
-The feature request defines the desired outcome.
-
-The implementation plan defines the execution path.
-
-The coding agent analyzes the codebase, identifies affected areas, and executes tasks incrementally.
-
-The developer's role is to:
-
-- Clarify requirements
-- Review plans
-- Validate assumptions
-- Monitor execution
-- Approve deployment
+- PRD provides structured intent
+- Research reduces architectural uncertainty
+- High-level planning ensures system coherence
+- Repo-level planning enables deterministic execution
+- Coding agents perform implementation
 
 ---
 
 # Final Mental Model
 
-When starting any new feature, think in terms of:
+When starting any feature:
 
-1. What problem are we solving?
-2. How important and risky is it?
-3. How much documentation is required?
-4. What is the implementation plan?
-5. How will we verify correctness?
-6. How will we deploy safely?
-7. Did the feature achieve its intended outcome?
-
----
-
-# Personal SOP
-
-Clarify → Triage → Plan → Build → Validate → Release → Learn
+1. What problem are we solving? (PRD)
+2. How complex or risky is it? (Triage)
+3. What are the possible technical approaches? (Research)
+4. What is the system design? (High-level plan)
+5. What exact code changes are needed? (Repo plan)
+6. How do we ship safely? (Rollout)
+7. Did it achieve its goal? (Review)
